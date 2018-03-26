@@ -97,3 +97,7 @@ You have flexibility to choose how to load your modules:
 ### Peer Dependency
 
 If you want to use it nicely across your ecosystem of npm modules, specify this package as a peer dependency.
+
+## Premium Support
+
+Looking to start or develop your new project with **GraphQL**? Reach out to us now, we can help you along every step: contact@cultofcoders.com. We specialise in building high availability GraphQL APIs and with the help with our awesome frontend developers we can easily consume any GraphQL API.
