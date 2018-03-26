@@ -30,13 +30,14 @@ load({
     type Query {
       users: [User]
     }
-  `
-}, {
-  User: {
-    fullname: _ => `${_.firstname} ${_.lastname}`
-  },
-  Query: {
-    users: () => Users.find().fetch();
+  `,
+  resolvers: {
+    User: {
+      fullname: _ => `${_.firstname} ${_.lastname}`
+    },
+    Query: {
+      users: () => Users.find().fetch();
+    }
   }
 })
 ```
@@ -95,4 +96,4 @@ You have flexibility to choose how to load your modules:
 
 ### Peer Dependency
 
-If you want to use it nicely across your ecosystem of apps, specify this package as a peer dependency.
+If you want to use it nicely across your ecosystem of npm modules, specify this package as a peer dependency.
