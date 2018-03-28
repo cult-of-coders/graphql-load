@@ -192,7 +192,7 @@ export default { typeDefs, resolvers }
 Maybe you find the `type Query` and other stuff repetitive, for this we created a `wrap()` function:
 
 ```ts
-wrap('Query', module: GraphQLModule | GraphQLModule[])
+wrap('Query', module: GraphQLModule | GraphQLModule[]): GraphQLModule
 ```
 
 ```js
@@ -207,6 +207,7 @@ export default wrap('Query', {
     getUsers() { ... }
   }
 })
+// It returns ofcourse a usable and wrapped GraphQLModule
 ```
 
 Now to aggregate at module level:
@@ -243,11 +244,6 @@ load([EntitiesModule, ...APIModules]);
 // maybe here? export default getSchema();
 ```
 
-### Independent Modules & Extensions
-
-There may be scenarios where you want to develop stand-alone modules, for example a chat application,
-we recommend that you do not depend on this package for this, and don't automatically inject schema via `load()`, rather give the future developers the ability to choose, and make your module only export a `GraphQL Module` and load it where you need it.
-
 ## The Loader
 
 You can have independent loaders and independent schemas.
@@ -260,10 +256,6 @@ const loader = new Loader();
 loader.load(...);
 loader.getSchema();
 ```
-
-### Peer Dependency
-
-If you want to use it nicely across your ecosystem of npm modules, specify this package as a peer dependency. And you can inject your loaded types by default and independently.
 
 ## Premium Support
 
