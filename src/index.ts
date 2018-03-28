@@ -33,18 +33,6 @@ export class Loader {
     });
   }
 
-  loadQuery(typeDefs, resolvers) {
-    return this._loadByRootType('Query', typeDefs, resolvers);
-  }
-
-  loadMutation(typeDefs, resolvers) {
-    return this._loadByRootType('Mutation', typeDefs, resolvers);
-  }
-
-  loadSubscription(typeDefs, resolvers) {
-    return this._loadByRootType('Subscription', typeDefs, resolvers);
-  }
-
   getSchema(): GraphQLModule {
     return {
       typeDefs: mergeTypes(this.typeDefs, { all: true }),
@@ -60,14 +48,39 @@ export class Loader {
     return this.resolvers;
   }
 
-  _loadByRootType(rootType, _typeDefs, _resolvers) {
-    const typeDefs = `type ${rootType} { ${_typeDefs} }`;
-    const resolvers = { [rootType]: _resolvers };
+  static wrap(rootType, _module: GraphQLModule | GraphQLModule[]) {
+    const modules = Array.isArray(_module) ? _module : [_module];
 
-    this.load({
+    let typeDefs = [];
+    let resolvers = [];
+
+    modules.forEach(module => {
+      if (module.typeDefs) {
+        const moduleTypeDefs = Array.isArray(module.typeDefs)
+          ? module.typeDefs
+          : [module.typeDefs];
+
+        moduleTypeDefs.forEach(moduleTypeDef => {
+          typeDefs.push(`type ${rootType} { ${moduleTypeDef} }`);
+        });
+      }
+      if (module.resolvers) {
+        const moduleResolvers = Array.isArray(module.resolvers)
+          ? module.resolvers
+          : [module.resolvers];
+
+        moduleResolvers.forEach(moduleResolver => {
+          resolvers.push({
+            [rootType]: moduleResolver,
+          });
+        });
+      }
+    });
+
+    return {
       typeDefs,
       resolvers,
-    });
+    };
   }
 }
 
@@ -77,8 +90,6 @@ export default instance;
 
 const load = instance.load.bind(instance);
 const getSchema = instance.getSchema.bind(instance);
-const loadQuery = instance.loadQuery.bind(instance);
-const loadSubscription = instance.loadSubscription.bind(instance);
-const loadMutation = instance.loadMutation.bind(instance);
+const wrap = Loader.wrap;
 
-export { load, getSchema, loadQuery, loadSubscription, loadMutation };
+export { load, getSchema, wrap };

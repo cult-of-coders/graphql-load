@@ -9,6 +9,6 @@ export interface ResolverMap {
 }
 
 export interface GraphQLModule {
-  typeDefs?: Array<string> | string;
-  resolvers?: ResolverMap | Array<ResolverMap>;
+  typeDefs?: string | string[];
+  resolvers?: ResolverMap | ResolverMap[];
 }

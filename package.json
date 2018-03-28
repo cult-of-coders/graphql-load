@@ -1,14 +1,15 @@
 {
   "name": "graphql-load",
+  "keywords": ["apollo", "graphql", "graphql load", "graphql loader"],
   "version": "0.1.0",
-  "description": "GraphQL schema loader for complex & ambitious projects",
+  "description":
+    "GraphQL schema loader for complex & ambitious projects. Helps with modularizing your GraphQL Schema.",
   "main": "dist/index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/cult-of-coders/graphql-load.git"
   },
   "dependencies": {
-    "apollo-live-server": "^0.1.0",
     "merge-graphql-schemas": "^1.5.1"
   },
   "scripts": {
@@ -20,8 +21,10 @@
     "lint": "tslint --type-check --project ./tsconfig.json ./src/**/*.ts",
     "watch": "tsc -w",
     "testonly": "mocha --reporter spec --full-trace ./dist/test/*.js",
-    "coverage": "node ./node_modules/istanbul/lib/cli.js cover _mocha -- --full-trace ./dist/test/*.js",
-    "postcoverage": "remap-istanbul --input coverage/coverage.raw.json --type lcovonly --output coverage/lcov.info",
+    "coverage":
+      "node ./node_modules/istanbul/lib/cli.js cover _mocha -- --full-trace ./dist/test/*.js",
+    "postcoverage":
+      "remap-istanbul --input coverage/coverage.raw.json --type lcovonly --output coverage/lcov.info",
     "prepublishOnly": "npm run clean && npm run compile"
   },
   "devDependencies": {
