@@ -1,7 +1,7 @@
 {
   "name": "graphql-load",
   "keywords": ["apollo", "graphql", "graphql load", "graphql loader"],
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description":
     "GraphQL schema loader for complex & ambitious projects. Helps with modularizing your GraphQL Schema.",
   "main": "dist/index.js",
