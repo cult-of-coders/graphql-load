@@ -33,6 +33,11 @@ export class Loader {
     });
   }
 
+  unload(): void {
+    this.typeDefs = [];
+    this.resolvers = [];
+  }
+
   getSchema(): GraphQLModule {
     return {
       typeDefs: mergeTypes(this.typeDefs, { all: true }),
@@ -89,7 +94,8 @@ const instance = new Loader();
 export default instance;
 
 const load = instance.load.bind(instance);
+const unload = instance.unload.bind(instance);
 const getSchema = instance.getSchema.bind(instance);
 const wrap = Loader.wrap;
 
-export { load, getSchema, wrap };
+export { load, unload, getSchema, wrap };
