@@ -257,6 +257,17 @@ loader.load(...);
 loader.getSchema();
 ```
 
+## Unload
+
+In rare cases you may need to remove what's loaded. For that there is the `unload()` function:
+
+```js
+import { load, unload } from 'graphql-load'
+
+load(...) // add schema
+unload() // remove schema
+```
+
 ## Premium Support
 
 Looking to start or develop your new project with **GraphQL**? Reach out to us now, we can help you along every step: contact@cultofcoders.com. We specialise in building high availability GraphQL APIs and with the help with our awesome frontend developers we can easily consume any GraphQL API.
